@@ -93,8 +93,8 @@ public class Objetos {
 	static RectanguloColor RC;
 
 	public static void main(String args[]) throws IOException {
-		if (args.length < 4) {
-			System.out.println("Uso: Objetos origen-x origen-y ancho alto");
+		if (args.length < 5) {
+			System.out.println("Uso: Objetos origen-x origen-y ancho alto color");
 			System.exit(1);
 		}
 
