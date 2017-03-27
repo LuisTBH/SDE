@@ -40,11 +40,28 @@ public class AccesoArduinoStub implements InterfazAccesoArduino {
   private synchronized void connect()
   { //Conecta con el servidorRPC
 	//EJERCICIO: Implemente el método connect
+	  try {
+		m_Socket = new Socket(host, port);
+		br = new BufferedReader(new InputStreamReader(m_Socket.getInputStream()));
+		pr = new PrintWriter(m_Socket.getOutputStream());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	
   }
 
   private synchronized void disconnect(){ 
 	//EJERCICIO: Implemente el método disconnect
+	 try {
+		m_Socket.close();
+		br.close();
+		pr.close();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
 	 
   }
 }
