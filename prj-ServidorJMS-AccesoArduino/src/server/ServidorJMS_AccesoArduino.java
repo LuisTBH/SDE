@@ -202,6 +202,7 @@ public class ServidorJMS_AccesoArduino implements javax.jms.MessageListener{
 			    //EJERCICIO:
 				//Enviar la orden al Arduino invocando el método enviarOrdenArduino del objeto AA
 			    s_respuesta_de_Arduino =  AA.enviarOrdenArduino(orden);
+			    
 			    //System.out.println("Enviada orden: " + orden+ " y recibida respuesta:" + s_respuesta_de_Arduino);
 			    send_respuesta_de_arduino(s_respuesta_de_Arduino);
 			    sleep(100);//Tiempo mínimo entre envíos a Arduino

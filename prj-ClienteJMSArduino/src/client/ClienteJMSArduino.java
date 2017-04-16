@@ -144,7 +144,7 @@ public class ClienteJMSArduino implements javax.jms.MessageListener{
 	    		stdOut.flush();
 				//EJERCICIO: Leer de teclado
 	    		input = stdIn.readLine();
-		        //EJERCICIO: Enviar la orden al Arduino invocando el método send_orden_para_arduino de ClientArduino
+		        //EJERCICIO: Enviar la orden al Arduino invocando el metodo send_orden_para_arduino de ClientArduino
 	    		ClientArduino.send_orden_para_arduino(input);
     	    
 	        }  	
