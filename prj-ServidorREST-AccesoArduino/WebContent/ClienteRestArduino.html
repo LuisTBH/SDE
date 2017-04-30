@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Cliente REST Arduino</title>
+</head>
+<body>
+
+<h1>Calling REST from Javascript.</h1>
+<hr> <br>
+<form id="callForm" action="">
+Base URL: <input type="text" name="baseURL" value ="http://localhost:8080/prj-ServidorREST-AccesoArduino/valores/sensors" size="75"> <br> <br>
+Accepted Type: <input type="text" name="acceptedType" value ="application/json">       
+<button type="Button" onclick="getAllSensors()">Get All Values</button> <br> <br>
+</form>
+
+<hr> <br>
+<strong>Working with the DAO in the server...</strong><br> <br>
+<form id="WorkingWithDAOForm" action="">
+Identifier: <input type="text" name="ID" > 
+<button type="Button" onclick="getSensor()">Get Sensor</button> 
+<button type="Button" onclick="deleteSensor()">Delete Sensor</button>
+<button type="Button" onclick="new_val()">Send New Value</button>
+<button type="Button" onclick="newSensor()">New Sensor</button> <br> <br>
+New Value: <input type="text" name="new_value" value ="0.0" size="10"> <br> <br>
+Sample: <input type="checkbox" onchange="handleChange(this);">
+Trigger error: <input type="text" name="error" value ="0.5" size="6"> 
+Min. delay: <input type="text" name="delay" value ="1000">
+</form> 
+
+<hr> <br>
+<strong>Sending orders to Arduino...</strong><br> <br>
+<form id="SendingOrdersToArduinoForm" action="">
+Identifier: <input type="text" name="IDPost" > <br> <br>
+New value: <input type="text" name="new_value" value ="indicar valor" size="20">
+<button type="Button" onclick="postValue()">Post Value</button>
+</form> 
+
+<hr> 
+<p id="sample"> Here the result of the sampling </p>
+<hr> 
+<p id="result"> Here the synchronous results </p>
+<hr> 
+<script>
+var baseURL = "http://localhost:8080/prj-ServidorREST-AccesoArduino/valores/sensors";
+var acceptMIME = "application/json"; 
+var id = "";
+var val = 0.0;
+var continueSampling = false;
+var valAnt = 0.0;
+var error = 0.5;
+var delay = 1000;
+var idPost = "";
+var new_value = "";
+
+function getFormValues() {
+	baseURL = document.getElementById("callForm").elements["baseURL"].value;
+	acceptMIME = document.getElementById("callForm").elements["acceptedType"].value;
+	id = document.getElementById("WorkingWithDAOForm").elements["ID"].value;
+	val = document.getElementById("WorkingWithDAOForm").elements["new_value"].value;
+	error = document.getElementById("WorkingWithDAOForm").elements["error"].value;
+	delay = document.getElementById("WorkingWithDAOForm").elements["delay"].value;
+	idPost = document.getElementById("SendingOrdersToArduinoForm").elements["IDPost"].value;
+	new_value = document.getElementById("SendingOrdersToArduinoForm").elements["new_value"].value;
+}
+
+function getAllSensors() {
+	getFormValues();
+	xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", baseURL, false );
+    xmlHttp.setRequestHeader ("Accept", acceptMIME);
+    xmlHttp.send( null );
+    document.getElementById("result").innerHTML = xmlHttp.responseText;
+}
+
+function getSensor() {
+	getFormValues();
+	xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", baseURL+"/"+id, false );
+    xmlHttp.setRequestHeader ("Accept", acceptMIME);
+    xmlHttp.send( null );
+    document.getElementById("result").innerHTML = xmlHttp.response;
+}
+
+function new_val() {
+	getFormValues();
+	xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "POST", baseURL+"/"+id, false );
+    xmlHttp.setRequestHeader ("Content-type", "application/x-www-form-urlencoded");
+    xmlHttp.setRequestHeader ("Accept", "text/plain"); 
+    xmlHttp.send("new_value="+val);
+    document.getElementById("result").innerHTML = xmlHttp.response;
+}
+
+function newSensor() {
+	getFormValues();
+	xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "POST", baseURL, false );
+    xmlHttp.setRequestHeader ("Content-type", "application/x-www-form-urlencoded");
+    xmlHttp.setRequestHeader ("Accept", "text/plain");
+    xmlHttp.send("id="+id+"&description="+""+"&value="+val);
+    document.getElementById("result").innerHTML = xmlHttp.response;
+}
+
+function handleChange(checkBox) {
+	 if (checkBox.checked) {
+		 continueSampling = true;
+		 getSampleEvent();
+	 } else {
+		 continueSampling = false;
+	 }
+}
+
+function getSampleEvent() {
+	getFormValues();
+	var xmlHttpAsync = new XMLHttpRequest();
+	var resourceUrl = baseURL+"/"+id+"/wait?value="+valAnt+"&error="+error+"&delay="+delay;
+    xmlHttpAsync.open( "GET",resourceUrl, true ); // true define async call
+    //Force json in order to simplify response parsing
+    xmlHttpAsync.setRequestHeader ("Accept", "application/json");
+    //Set response callback
+    xmlHttpAsync.onreadystatechange = function() {
+    	myState = xmlHttpAsync.readyState;
+    	if (myState == 4) {
+    		if (continueSampling == true) {
+    			document.getElementById("sample").innerHTML = xmlHttpAsync.response;
+    			//valAnt = JSON.parse(xmlHttpAsync.response).d_value;
+    			getSampleEvent(); 
+    		}
+    	} 
+    };
+    //Async call
+    xmlHttpAsync.send( null );
+}
+
+function deleteSensor() { 	
+	getFormValues();
+	xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "DELETE", baseURL+"/"+id, false );
+    xmlHttp.send( null );
+}
+
+function postValue() {
+	getFormValues();
+	xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "POST", baseURL+"/"+idPost+"/SendToArduino", false );
+    xmlHttp.setRequestHeader ("Content-type", "application/x-www-form-urlencoded");
+    xmlHttp.setRequestHeader ("Accept", "text/plain"); 
+    xmlHttp.send("new_value="+new_value);
+    document.getElementById("result").innerHTML = xmlHttp.response;
+}
+
+</script>
+
+</body>
+</html> 
