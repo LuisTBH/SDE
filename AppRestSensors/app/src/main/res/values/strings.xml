@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Acceso a sensores...</string>
+    <string name="dir_IP">Dirección IP:</string>
+    <string name="edit_dir_IP">Introduce la dirección IP del servidor...</string>
+    <!-- <string name="edit_dir_IP">http://1-dot-restgae-1152.appspot.com/prj_restgae/sensors</string> -->
+    <string name="id_Sens">Identificador sensor:</string>
+    <string name="edit_id_Sens">Introduce el identificador del sensor...</string>
+    <string name="button_obtener_valor">Obtener valor actual</string>
+    <string name="no_message"> </string>
+    <string name="nuevo_val_Sens">Nuevo valor para el sensor:</string>
+    <string name="edit_nuevo_val_Sens">Introduce el nuevo valor para el sensor...</string>
+    <string name="button_enviar_nuevo_valor">Enviar nuevo valor</string>
+    <string name="button_listar_valores_sensores">Listar valores sensores</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_display_message">El mensaje...</string>
+
+</resources>

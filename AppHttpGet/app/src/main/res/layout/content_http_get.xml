@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="luis.sde.upv.es.apphttpget.HttpGetActivity"
+    tools:showIn="@layout/activity_http_get">
+
+
+    <Button
+        android:id="@+id/botonText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Http text" />
+
+    <TextView
+        android:id="@+id/textoHTTP"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:text="Texto Http"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/botonImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Image" />
+
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

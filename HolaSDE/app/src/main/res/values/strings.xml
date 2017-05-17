@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">HolaSDE</string>
+    <string name="action_settings">Settings</string>
+    <string name="saludo">Hola clase de SDE</string>
+    <string name="mensaje">Introduce aquí un mensaje...</string>
+    <string name="button_tam">Aumentar</string>
+    <string name="title_activity_display_message">Este es tu mensaje aumentado:</string>
+</resources>

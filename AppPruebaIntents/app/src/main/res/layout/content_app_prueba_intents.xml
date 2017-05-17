@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="luis.sde.upv.es.apppruebaintents.AppPruebaIntentsActivity"
+    tools:showIn="@layout/activity_app_prueba_intents">
+
+    <Button
+        android:id="@+id/btn_web"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Navegar por Internet" />
+
+    <Button
+        android:id="@+id/btn_telefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Llamar por teléfono" />
+    <Button
+        android:id="@+id/btn_mapa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Muestra mapa" />
+    <Button
+        android:id="@+id/btn_contacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selecciona contacto" />
+
+    <TextView
+        android:id="@+id/texto_contacto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contacto"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</LinearLayout>
