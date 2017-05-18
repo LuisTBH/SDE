@@ -282,7 +282,7 @@ void loop() {
       //Formato respuesta: nombre1=valor1[&nombre2=valor2......&nombreN=valorN]
       String respuesta = "";
       if (nombre.equals(nombre_SolicitudTodos)) {
-//       respuesta = nombre_SensorUltrasonidos + "=" + valor_SensorUltrasonidos + "&" + nombre_SensorLiquidos + "=" + valor_SensorLiquidos + "&" + nombre_SensorPresion + "=" + valor_SensorPresion;
+       respuesta = nombre_SensorUltrasonidos + "=" + valor_SensorUltrasonidos + "&" + nombre_SensorLiquidos + "=" + valor_SensorLiquidos + "&" + nombre_SensorPresion + "=" + valor_SensorPresion;
       }
       else if (nombre.equals(nombre_SensorUltrasonidos)) {
         respuesta = nombre_SensorUltrasonidos + "=" + valor_SensorUltrasonidos;
